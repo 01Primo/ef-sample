@@ -32,19 +32,7 @@ public class WeatherForecastController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Put(WeatherForecast forecast)
     {
-        var entity = 
-            await _context
-                .WeatherForecast
-                .FindAsync(forecast.Id);
-        
-        if (entity is null)
-        {
-            return NotFound();
-        }
-
-        entity.TemperatureC = 13;
-        
-        _context.WeatherForecast.Update(entity);
+        _context.WeatherForecast.Update(forecast);
         await _context.SaveChangesAsync();
         
         return Ok();
