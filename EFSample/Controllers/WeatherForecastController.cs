@@ -35,17 +35,16 @@ public class WeatherForecastController : ControllerBase
         var entity = 
             await _context
                 .WeatherForecast
-                .AsNoTracking()
-                .FirstOrDefaultAsync(f => f.Id == forecast.Id);
+                .FindAsync(forecast.Id);
         
         if (entity is null)
         {
             return NotFound();
         }
 
-        var updated = entity with {TemperatureC = 12};
+        entity.TemperatureC = 13;
         
-        _context.WeatherForecast.Update(updated);
+        _context.WeatherForecast.Update(entity);
         await _context.SaveChangesAsync();
         
         return Ok();
