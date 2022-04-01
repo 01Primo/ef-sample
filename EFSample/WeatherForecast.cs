@@ -1,6 +1,6 @@
 namespace EFSample;
 
-public class WeatherForecast
+public record WeatherForecast
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }
